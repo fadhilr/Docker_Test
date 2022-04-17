@@ -1,89 +1,33 @@
-pipeline
+pipeline{
+	agent any
 
-{
+	stages{
+		stage('Build'){
+			steps{
+				bat "mvn clean"
+			}
+		}
 
-agent any
+		stage('deploy'){
+			steps{
+				echo 'deploying the code'
+			}
+		}
 
-
-
-stages
-
-{
-
-stage('Build')
-
-{
-
-steps
-
-{
-
-bat "mvn clean"
-
-}
-
-
-
-}
-
-stage('deploy')
-
-{
-
-steps{
-
-echo 'deploying the code'
-
-}
-
-
-
-}
-
-stage('test')
-
-{
-
-steps{
-
-bat "mvn test"
-
-}
-
-
-
-}
-
-
-
-stage('Unit Testing')
-
-{
-
-steps{
-
-bat "mvn compile"
-
-}
-
-
-
-}
-
-stage('Release')
-
-{
-
-
-
-steps{
-
-echo 'releasing the project'
-
-}
-
-
-
-}
-
+		stage('test'){
+			steps{
+				bat "mvn test"
+			}
+		}
+		stage('Unit Testing'){
+			steps{
+				bat "mvn compile"
+			}
+		}
+		stage('Release'){
+			steps{
+				echo 'releasing the project'
+			}
+		}
+	}
 }
